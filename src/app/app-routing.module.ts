@@ -7,7 +7,13 @@ const routes: Routes = [
     loadChildren: () =>
       import('./comics/comics.module').then((m) => m.ComicsModule),
   },
-  { path: '', pathMatch: 'full', redirectTo: '/comics' },
+
+  {
+    path: 'characters',
+    loadChildren: () =>
+      import('./characters/characters.module').then((m) => m.CharactersModule),
+  },
+  { path: '', pathMatch: 'full', redirectTo: '/characters' },
 ];
 
 @NgModule({

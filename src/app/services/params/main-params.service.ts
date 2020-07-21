@@ -10,8 +10,12 @@ export class MainParamsService {
   private offset$ = new BehaviorSubject<any>({ offset: 0 });
 
   initialize(x: any) {
-    this.limit$.next(x);
-    this.offset$.next({});
+    if (x.limit) {
+      this.limit$.next({ limit: x.limit });
+    }
+    if (x.offset) {
+      this.offset$.next({ offset: x.offset });
+    }
   }
 
   resetAll() {
@@ -43,14 +47,4 @@ export class MainParamsService {
     this.limit$.asObservable(),
     this.offset$.asObservable(),
   ]).pipe(map(([limit, offset]) => Object.assign({}, limit, offset)));
-
-  // mainParams$ = combineLatest([
-  //   this.limit$.asObservable(),
-  //   this.offset$.asObservable(),
-  // ]).pipe(
-  //   map(([limit, offset]) => ({
-  //     limit,
-  //     offset,
-  //   }))
-  // );
 }

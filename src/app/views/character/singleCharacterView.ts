@@ -1,4 +1,4 @@
-export class SingleCharacterView {
+export interface SingleCharacterView {
   id: number;
   name: string;
   description: string;
@@ -6,4 +6,5 @@ export class SingleCharacterView {
   modified: Date;
   marvelUrl: string;
   standardThumbnail?: string;
+  uncannyThumbnail?: string;
 }

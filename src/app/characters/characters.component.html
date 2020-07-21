@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="form-group w-75 mx-auto mt-2">
+    <label for="exampleInputEmail1">Character Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="exampleInputEmail1"
+      aria-describedby="emailHelp"
+      placeholder="Enter character name"
+      [(ngModel)]="characterParamsService.nameStartsWith"
+    />
+  </div>
+  <ng-container *ngIf="result$ | async as result">
+    <div class="d-flex flex-wrap justify-content-between">
+      <ng-container *ngFor="let character of result.listOfCharacters">
+        <div class="card mt-1">
+          <img [src]="character.uncannyThumbnail" class="card-img-top" />
+          <div class="card-body flex-grow-1">
+            <p class="card-text">
+              {{ character.name }}
+            </p>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </ng-container>
+</div>
