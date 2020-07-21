@@ -1,0 +1,60 @@
+<div class="container">
+  <ng-container *ngIf="combined$ | async as combined">
+    <div class="d-flex flex-column d-md-flex flex-md-row">
+      <img [src]="combined.comic.uncannyThumbnail" />
+      <div class="card p-2">
+        <h3>{{ combined.comic.title }}</h3>
+        <h4>Description</h4>
+        <p class="card-text">{{ combined.comic.description }}</p>
+        <div class="row">
+          <div class="col">
+            <h6>Isbn</h6>
+            <p>{{ combined.comic.isbn }}</p>
+            <h6>Price</h6>
+            <p>{{ combined.comic.printPrice }}</p>
+          </div>
+          <div class="col">
+            <h6>Format</h6>
+            <p>{{ combined.comic.format }}</p>
+            <h6>Pages</h6>
+            <p>{{ combined.comic.pageCount }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h5 class="text-center mt-2">Creators</h5>
+    <div class="row p-3 mt-0">
+      <ng-container *ngFor="let one of combined.comic.creators">
+        <div class="card border-0 col-6 col-md-3 p-2">
+          <h6 class="mb-0">{{ one.role | titlecase }}</h6>
+          <p>{{ one.name | titlecase }}</p>
+        </div>
+      </ng-container>
+    </div>
+
+    <ng-container
+      *ngIf="
+        combined.characterCollectionInfo.showCharacter &&
+        combined.characterCollectionInfo.characterList.length > 0
+      "
+    >
+      <h5 class="text-center">Recomended Characters</h5>
+      <div class="d-flex flex-wrap justify-content-around">
+        <ng-container
+          *ngFor="
+            let character of combined.characterCollectionInfo.characterList
+          "
+        >
+          <div class="card custom-card mx-2 my-2">
+            <img [src]="character.standardThumbnail" class="card-img-top" />
+            <div class="card-body flex-grow-1">
+              <p class="card-text">
+                {{ character.name }}
+              </p>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </ng-container>
+  </ng-container>
+</div>

@@ -1,0 +1,14 @@
+// @media (min-width: 1199.98px) {
+//   .custom-card {
+//     flex: 0 1 calc(25% - 1em);
+//   }
+// }
+// .custom-card {
+//   height: 2em;
+// }
+
+@media (max-width: 991.98px) {
+  .custom-card {
+    flex: 0 1 calc(50% - 0.5em);
+  }
+}

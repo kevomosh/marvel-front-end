@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="form-group w-75 mx-auto mt-2">
+    <label for="exampleInputEmail1">Comic Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="exampleInputEmail1"
+      aria-describedby="emailHelp"
+      placeholder="Enter comic name"
+      [(ngModel)]="comicsParamService.titleStartsWith"
+    />
+  </div>
+
+  <ng-container *ngIf="result$ | async as result">
+    <div class="d-flex flex-wrap justify-content-between">
+      <ng-container *ngFor="let comic of result.listOfComics">
+        <a
+          class="card mt-1 text-decoration-none"
+          [routerLink]="['/comics/detail', comic.id]"
+        >
+          <img [src]="comic.thumbnail" class="card-img-top" />
+          <div class="card-body flex-grow-1">
+            <p class="card-text">
+              {{ comic.title }}
+            </p>
+          </div>
+        </a>
+      </ng-container>
+    </div>
+  </ng-container>
+</div>
