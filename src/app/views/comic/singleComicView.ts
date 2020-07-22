@@ -12,5 +12,6 @@ export interface SingleComicView {
   printPrice?: number;
   thumbnail?: string;
   uncannyThumbnail?: string;
+  poster?: string;
   creators: { name: string; role: string }[];
 }

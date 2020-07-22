@@ -13,14 +13,17 @@
   <ng-container *ngIf="result$ | async as result">
     <div class="d-flex flex-wrap justify-content-between">
       <ng-container *ngFor="let character of result.listOfCharacters">
-        <div class="card mt-1">
+        <a
+          class="card mt-1 text-decoration-none"
+          [routerLink]="['/characters/detail', character.id]"
+        >
           <img [src]="character.uncannyThumbnail" class="card-img-top" />
           <div class="card-body flex-grow-1">
             <p class="card-text">
               {{ character.name }}
             </p>
           </div>
-        </div>
+        </a>
       </ng-container>
     </div>
   </ng-container>

@@ -1,0 +1,40 @@
+<div class="container">
+  <ng-container *ngIf="comicsTable$ | async as info">
+    <h4 class="text-center">Comics table</h4>
+    <ngx-datatable
+      class="bootstrap"
+      [rows]="info.comics.listOfComics"
+      [columnMode]="'flex'"
+      [headerHeight]="50"
+      [footerHeight]="50"
+      [rowHeight]="50"
+      [externalPaging]="true"
+      [count]="info.comics.total"
+      [offset]="info.tableInfo.pageNumber"
+      [limit]="info.tableInfo.limitObj.limit"
+      (page)="setPage($event)"
+    >
+      <ngx-datatable-column name="Id" [flexGrow]="0.5">
+        <ng-template ngx-datatable-cell-template let-value="value">
+          <a
+            class="btn btn-primary btn-small pt-0"
+            [routerLink]="['/comics/detail/', value]"
+            >View</a
+          >
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Poster" [flexGrow]="0.5">
+        <ng-template ngx-datatable-cell-template let-value="value">
+          <img [src]="value" class="img-fluid pt-0" />
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Title" [flexGrow]="2">
+        <ng-template ngx-datatable-cell-template let-value="value">
+          <p>{{ value }}</p>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </ng-container>
+</div>

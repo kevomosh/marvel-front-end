@@ -13,6 +13,47 @@ export class CharacterParamsService {
     private mainParamsService: MainParamsService
   ) {}
   private nameStartsWith$ = new BehaviorSubject<any>({});
+  private collectionLimit$ = new BehaviorSubject<{ limit: number }>({
+    limit: 10,
+  });
+  private pageNumber$ = new BehaviorSubject<number>(0);
+  private seriesCollectionOffset$ = new BehaviorSubject<any>({ offset: 0 });
+  private comicsCollectionOffset$ = new BehaviorSubject<any>({ offset: 0 });
+
+  comicTableInfo$ = combineLatest([
+    this.pageNumber$.asObservable(),
+    this.collectionLimit$.asObservable(),
+  ]).pipe(
+    map(([pageNumber, limitObj]) => ({
+      pageNumber,
+      limitObj,
+    }))
+  );
+
+  setPageNumber(input: number) {
+    this.pageNumber$.next(input);
+  }
+
+  setSeriesCollectionOffset(input: any) {
+    this.helperService.setBehaviorSubject(
+      this.seriesCollectionOffset$,
+      input,
+      'offset'
+    );
+  }
+
+  setComicsCollectionOffset(input: any) {
+    this.helperService.setBehaviorSubject(
+      this.comicsCollectionOffset$,
+      input,
+      'offset'
+    );
+  }
+
+  combinedComicsCollectionParams$ = combineLatest([
+    this.collectionLimit$.asObservable(),
+    this.comicsCollectionOffset$.asObservable(),
+  ]).pipe(map(([limit, offset]) => Object.assign({}, limit, offset)));
 
   allCharacterParams$ = combineLatest([
     this.mainParamsService.mainParams$,
